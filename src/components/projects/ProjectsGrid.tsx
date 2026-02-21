@@ -31,7 +31,8 @@ export function ProjectsGrid({
   return (
     <div className="min-h-screen bg-[#0f0f0f] text-white">
       {/* Header */}
-      <div className="border-b border-gray-800/50 bg-[#0f0f0f]/95 backdrop-blur-sm sticky top-0 z-10">
+      <div className="h-6 bg-[#0f0f0f]"></div>
+      <div className="bg-[#0f0f0f]/95 backdrop-blur-sm sticky top-6 z-10">
         <div className="max-w-7xl mx-auto px-6 py-6">
           {/* Top Row */}
           <div className="flex items-center justify-between mb-6">
@@ -166,11 +167,12 @@ export function ProjectsGrid({
               </h2>
 
               {viewMode === "grid" ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                <div className="grid gap-4" style={{ gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))" }}>
                   {projects.map((project) => (
                     <div
                       key={project.id}
                       onClick={() => onProjectClick(project.id)}
+                      style={{ position: "relative" }}
                       className="group bg-gray-900/50 hover:bg-gray-900/80 border border-gray-800 hover:border-gray-700 rounded-xl p-6 cursor-pointer transition-all duration-200 hover:shadow-xl hover:-translate-y-1 relative"
                     >
                       {/* Project Icon */}
@@ -203,6 +205,7 @@ export function ProjectsGrid({
                           e.stopPropagation();
                           onDeleteProject(project.id);
                         }}
+                        style={{ position: "absolute", top: "16px", right: "16px" }}
                         className="absolute top-4 right-4 p-1.5 text-gray-500 hover:text-red-400 hover:bg-red-500/10 rounded transition-all duration-200 opacity-0 group-hover:opacity-100 cursor-pointer hover:scale-110"
                         title="Delete project"
                       >
@@ -218,7 +221,7 @@ export function ProjectsGrid({
                     <div
                       key={project.id}
                       onClick={() => onProjectClick(project.id)}
-                      className="group flex items-center gap-4 bg-gray-900/30 hover:bg-gray-900/60 border border-gray-800/50 hover:border-gray-700 rounded-lg p-4 cursor-pointer transition-all duration-200"
+                      className="group flex items-center gap-4 bg-gray-900/50 hover:bg-gray-900/80 border border-gray-800 hover:border-gray-700 rounded-xlg p-4 cursor-pointer transition-all duration-200 hover:shadow-xl"
                     >
                       {/* Icon */}
                       <div className="w-10 h-10 bg-gradient-to-br from-gray-700 to-gray-800 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -248,6 +251,7 @@ export function ProjectsGrid({
                           e.stopPropagation();
                           onDeleteProject(project.id);
                         }}
+                        style={{ marginLeft: "auto" }}
                         className="p-1.5 text-gray-500 hover:text-red-400 hover:bg-red-500/10 rounded transition-all duration-200 opacity-0 group-hover:opacity-100 cursor-pointer hover:scale-110"
                         title="Delete project"
                       >
