@@ -93,6 +93,6 @@ export const apiClient = {
     if (!response.ok) {
       throw new Error(`S3 Upload Error: ${response.status}`);
     }
-    return response; // S3 doesn't return JSON
+    return response;
   },
 };
