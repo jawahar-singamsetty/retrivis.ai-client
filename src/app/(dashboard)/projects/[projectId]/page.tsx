@@ -207,11 +207,54 @@ function ProjectPage({ params }: ProjectPageProps) {
   };
 
   const handleDocumentDelete = async (documentId: string) => {
-    console.log("Document Deleted");
+    if (!userId) return;
+
+    try {
+      const token = await getToken();
+
+      await apiClient.delete(
+        `/api/projects/${projectId}/files/${documentId}`,
+        token
+      );
+
+      // Update local state - remove the deleted document
+      setData((prev) => ({
+        ...prev,
+        documents: prev.documents.filter((doc) => doc.id !== documentId),
+      }));
+
+      toast.success("Document deleted successfully!");
+    } catch (err) {
+      toast.error("Document deletion failed");
+    }
   };
 
   const handleUrlAdd = async (url: string) => {
-    console.log("Add URL", url);
+    if (!userId) return;
+
+    try {
+      const token = await getToken();
+
+      const result = await apiClient.post(
+        `/api/projects/${projectId}/urls`,
+        {
+          url,
+        },
+        token
+      );
+
+      const newDocument = result.data;
+
+      // Update local state
+      setData((prev) => ({
+        ...prev,
+        documents: [newDocument, ...prev.documents],
+      }));
+
+      toast.success("Website added successfully!");
+    } catch (err) {
+      toast.error("Failed to add website");
+    };
   };
 
   const handleOpenDocument = (documentId: string) => {
