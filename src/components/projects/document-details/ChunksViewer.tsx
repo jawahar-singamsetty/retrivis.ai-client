@@ -30,9 +30,9 @@ export function ChunksViewer({
   });
 
   return (
-    <div className="h-full flex flex-col">
+    <div className="flex flex-col h-full">
       {/* Chunks Header */}
-      <div className="p-6 border-b border-gray-700">
+      <div className="p-6 border-b border-gray-700 flex-shrink-0">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-lg font-medium text-gray-100">Content Chunks</h3>
           <div className="text-sm text-gray-400">
@@ -53,7 +53,7 @@ export function ChunksViewer({
                 className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
                   chunksFilter === filter
                     ? "bg-blue-500/20 text-blue-400 border border-blue-500/30"
-                    : "bg-[#2a2a2a] text-gray-400 border border-gray-600 hover:bg-[#2e2e2e] hover:text-gray-300"
+                    : "bg-[#2a2a2a] text-gray-400 border border-gray-600 hover:bg-[#2e2e2e]"
                 }`}
               >
                 {filter.charAt(0).toUpperCase() + filter.slice(1)}
@@ -61,21 +61,21 @@ export function ChunksViewer({
             ))}
           </div>
 
-          <div className="flex-1 max-w-sm relative">
+          <div className="flex-1 relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
             <input
               type="text"
               placeholder="Search chunks..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10 pr-4 py-2 w-full bg-[#2a2a2a] border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400/30 focus:border-blue-400/50 text-gray-100 placeholder:text-gray-500"
-            />
+              className="pl-10 pr-4 py-2 w-full bg-[#2a2a2a] border border-gray-600 rounded-lg text-gray-100 placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-400/30"
+        />
           </div>
         </div>
       </div>
 
       {/* Chunks List */}
-      <div className="flex-1 overflow-y-auto p-6">
+      <div className="flex-1 overflow-y-auto p-6 min-h-0">
         {chunksLoading ? (
           <div className="flex items-center justify-center h-full">
             <div className="flex items-center gap-3">
@@ -127,7 +127,7 @@ export function ChunksViewer({
                     {chunk.chars} chars
                   </div>
                 </div>
-                <p className="text-sm text-gray-300 line-clamp-2">
+                <p className="text-sm text-gray-300 whitespace-pre-line line-clamp-3">
                   {chunk.content}
                 </p>
               </div>

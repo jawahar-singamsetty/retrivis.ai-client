@@ -145,9 +145,9 @@ export function FileDetailsModal({ document, onClose }: FileDetailsModalProps) {
         }))}
       />
 
-      <div className="flex-1 flex overflow-hidden">
+      <div className="flex-1 flex overflow-hidden min-h-0">
         {/* Main Content */}
-        <div className="flex-1 overflow-y-auto bg-[#1a1a1a]">
+        <div className="flex-1 flex flex-col bg-[#1a1a1a] min-w-0 min-h-0 overflow-hidden">
           {/* Show Chunks Viewer if completed */}
           {activeTab === "completed" && isProcessingComplete && (
             <ChunksViewer
