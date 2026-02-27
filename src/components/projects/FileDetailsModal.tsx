@@ -130,7 +130,7 @@ export function FileDetailsModal({ document, onClose }: FileDetailsModalProps) {
   return (
     <Modal onClose={onClose}>
       <ModalHeader document={document} onClose={onClose} />
-
+  
       <PipelineTabs
         activeTab={activeTab}
         onTabChange={setActiveTab}
@@ -144,11 +144,11 @@ export function FileDetailsModal({ document, onClose }: FileDetailsModalProps) {
           icon: <div></div>,
         }))}
       />
-
-      <div className="flex-1 flex overflow-hidden min-h-0">
+  
+      <div style={{ flex: 1, display: "flex", overflow: "hidden", minHeight: 0 }}>
         {/* Main Content */}
-        <div className="flex-1 flex flex-col bg-[#1a1a1a] min-w-0 min-h-0 overflow-hidden">
-          {/* Show Chunks Viewer if completed */}
+        <div style={{ flex: 1, display: "flex", flexDirection: "column", minWidth: 0, minHeight: 0, overflow: "hidden", backgroundColor: "#1a1a1a" }}>
+          
           {activeTab === "completed" && isProcessingComplete && (
             <ChunksViewer
               chunks={chunks}
@@ -157,16 +157,14 @@ export function FileDetailsModal({ document, onClose }: FileDetailsModalProps) {
               onSelectChunk={setSelectedChunk}
             />
           )}
-
-          {/* Show Partitioning Step */}
+  
           {activeTab === "partitioning" && (
             <PartitioningStep
               status={getStepStatus("partitioning")}
               elementsFound={processingDetails?.partitioning?.elements_found}
             />
           )}
-
-          {/* Show Chunking Step */}
+  
           {activeTab === "chunking" && (
             <ChunkingStep
               status={getStepStatus("chunking")}
@@ -175,19 +173,15 @@ export function FileDetailsModal({ document, onClose }: FileDetailsModalProps) {
               partitioningData={processingDetails?.partitioning}
             />
           )}
-
-          {/* Show Summarising Step */}
+  
           {activeTab === "summarising" && (
             <SummarisingStep
               status={getStepStatus("summarising")}
               summarisingData={processingDetails?.summarising}
             />
           )}
-
-          {/* Show Generic Steps for other steps */}
-          {!["completed", "partitioning", "chunking", "summarising"].includes(
-            activeTab
-          ) && (
+  
+          {!["completed", "partitioning", "chunking", "summarising"].includes(activeTab) && (
             <GenericStep
               stepName={currentStep?.name || "Processing"}
               description={currentStep?.description || "Processing step"}
@@ -195,7 +189,7 @@ export function FileDetailsModal({ document, onClose }: FileDetailsModalProps) {
             />
           )}
         </div>
-
+  
         {/* Detail Inspector */}
         <DetailInspector
           selectedChunk={selectedChunk}

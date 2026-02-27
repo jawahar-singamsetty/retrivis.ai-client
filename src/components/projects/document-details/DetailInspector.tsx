@@ -18,7 +18,7 @@ export function DetailInspector({
   }, [selectedChunk]);
 
   return (
-    <div className="w-[40%] bg-[#1e1e1e] border-l border-gray-700 flex flex-col">
+    <div style={{ width: "40%", backgroundColor: "#1e1e1e", borderLeft: "1px solid #374151", display: "flex", flexDirection: "column", flexShrink: 0, overflow: "hidden" }}>
       <div className="p-4 border-b border-gray-700">
         <h4 className="font-medium text-gray-100">Detail Inspector</h4>
       </div>

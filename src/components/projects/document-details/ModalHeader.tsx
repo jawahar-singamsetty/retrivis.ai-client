@@ -8,7 +8,7 @@ interface ModalHeaderProps {
 
 export function ModalHeader({ document, onClose }: ModalHeaderProps) {
   return (
-    <div className="flex items-center justify-between p-6 border-b border-gray-700">
+    <div style={{ flexShrink: 0 }} className="flex items-center justify-between p-6 border-b border-gray-700">
       <div className="flex items-center gap-3">
         <div className="w-10 h-10 bg-blue-500/10 border border-blue-500/20 rounded-lg flex items-center justify-center">
           {document.source_url ? <Globe size={20} /> : <FileText size={20} />}

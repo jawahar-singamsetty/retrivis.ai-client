@@ -1,4 +1,3 @@
-// components/ui/Modal.tsx
 interface ModalProps {
   children: React.ReactNode;
   onClose: () => void;
@@ -13,10 +12,30 @@ export function Modal({ children, onClose }: ModalProps) {
 
   return (
     <div
-      className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50"
+      style={{
+        position: "fixed",
+        inset: 0,
+        backgroundColor: "rgba(0,0,0,0.8)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        zIndex: 50,
+        padding: "16px",
+      }}
       onClick={handleOverlayClick}
     >
-      <div className="bg-[#1a1a1a] border border-gray-700 rounded-2xl shadow-2xl w-[98vw] h-[95vh] overflow-hidden flex flex-col">
+      <div
+        style={{
+          backgroundColor: "#1a1a1a",
+          border: "1px solid #374151",
+          borderRadius: "16px",
+          width: "95vw",
+          height: "90vh",
+          overflow: "hidden",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
         {children}
       </div>
     </div>

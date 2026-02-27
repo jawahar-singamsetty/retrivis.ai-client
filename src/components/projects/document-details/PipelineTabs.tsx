@@ -15,8 +15,8 @@ export function PipelineTabs({
   tabs,
 }: PipelineTabsProps) {
   return (
-    <div className="border-b border-gray-700 bg-[#1e1e1e] px-6">
-      <div className="flex space-x-0 overflow-x-auto">
+    <div style={{ flexShrink: 0 }} className="border-b border-gray-700 bg-[#1e1e1e] px-6">
+      <div className="flex space-x-0 overflow-x-auto">  
         {tabs.map((tab) => (
           <button
             key={tab.id}
