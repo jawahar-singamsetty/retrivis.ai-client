@@ -10,6 +10,7 @@ import { LoadingSpinner } from "@/components/ui/LoadingSpinner";
 
 import toast from "react-hot-toast";
 import { apiClient } from "@/lib/api";
+import { dispatchProjectsUpdated } from "@/lib/projectEvents";
 
 interface Project {
   id: string;
@@ -77,12 +78,40 @@ function ProjectsPage() {
       setProjects((prev) => [savedProject, ...prev]);
 
       setShowCreateModal(false);
+      dispatchProjectsUpdated();
       toast.success("Project created successfully!");
     } catch (err) {
       toast.error("Failed to create project");
       console.error("Failed to create project", err);
     } finally {
       setIsCreating(false);
+    }
+  };
+
+  const handleEditProject = async (
+    id: string,
+    name: string,
+    description: string
+  ) => {
+    try {
+      setError(null);
+      const token = await getToken();
+      await apiClient.put(
+        `/api/projects/${id}`,
+        { name, description },
+        token
+      );
+      setProjects((prev) =>
+        prev.map((p) =>
+          p.id === id ? { ...p, name, description } : p
+        )
+      );
+      dispatchProjectsUpdated();
+      toast.success("Project updated successfully!");
+    } catch (err) {
+      toast.error("Failed to update project");
+      console.error("Failed to update project", err);
+      throw err;
     }
   };
 
@@ -96,6 +125,7 @@ function ProjectsPage() {
       setProjects((prev) => prev.filter((project) => project.id !== projectId));
 
       toast.success("Project deleted successfully!");
+      dispatchProjectsUpdated();
     } catch (err) {
       toast.error("Failed to delete project");
       console.error("Failed to delete project", err);
@@ -142,6 +172,7 @@ function ProjectsPage() {
         onViewModeChange={setViewMode}
         onProjectClick={handleProjectClick}
         onCreateProject={handleOpenModal}
+        onEditProject={handleEditProject}
         onDeleteProject={handleDeleteProject}
       />
 

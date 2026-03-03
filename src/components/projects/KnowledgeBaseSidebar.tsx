@@ -858,7 +858,7 @@ export function KnowledgeBaseSidebar({
                 <button
                   onClick={onApplySettings}
                   disabled={settingsLoading}
-                  className="w-full bg-white hover:bg-gray-100 disabled:bg-gray-600 disabled:text-gray-400 text-black py-3 px-4 rounded-lg transition-all duration-200 font-medium flex items-center justify-center gap-2"
+                  className="w-full bg-white hover:bg-gray-100 disabled:bg-gray-600 disabled:text-gray-400 text-black py-3 px-4 rounded-lg transition-all duration-200 font-medium flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <Settings size={16} />
                   {settingsLoading ? "Applying..." : "Apply Settings"}

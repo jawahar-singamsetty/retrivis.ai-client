@@ -11,6 +11,7 @@ import { NotFound } from "@/components/ui/NotFound";
 import toast from "react-hot-toast";
 import { Project, Chat, ProjectDocument, ProjectSettings } from "@/lib/types";
 import { useRouter } from "next/navigation";
+import { dispatchProjectsUpdated } from "@/lib/projectEvents";
 
 interface ProjectPageProps {
   params: Promise<{
@@ -179,6 +180,22 @@ function ProjectPage({ params }: ProjectPageProps) {
       toast.success("Chat deleted successfully");
     } catch (err) {
       toast.error("Failed to delete chat");
+    }
+  };
+
+  const handleEditProject = async (id: string, name: string, description: string) => {
+    try {
+      const token = await getToken();
+      const result = await apiClient.put(`/api/projects/${id}`, { name, description }, token);
+      setData((prev) => ({
+        ...prev,
+        project: result.data ?? { ...prev.project!, name, description },
+      }));
+      dispatchProjectsUpdated();
+      toast.success("Project updated successfully!");
+    } catch (err) {
+      toast.error("Failed to update project");
+      throw err;
     }
   };
 
@@ -367,6 +384,7 @@ function ProjectPage({ params }: ProjectPageProps) {
           onCreateNewChat={handleCreateNewChat}
           onChatClick={handleChatClick}
           onDeleteChat={handleDeleteChat}
+          onEditProject={handleEditProject}
         />
 
         {/* KnowledgeBase Sidebar */}
