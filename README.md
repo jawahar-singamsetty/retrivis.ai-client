@@ -38,12 +38,6 @@
 
 ---
 
-## 🚀 Live Demo
-
-🔗 [retrivis-ai-client.vercel.app](https://retrivis-ai-client.vercel.app)
-
----
-
 ## 🔧 Tech Stack
 
 | Layer | Technology |
